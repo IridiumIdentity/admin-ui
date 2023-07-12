@@ -1,4 +1,4 @@
-name: Build Iridium - every pull request
+name: Build - every pull request
 
 on:
   pull_request:
