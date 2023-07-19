@@ -74,6 +74,12 @@
           },
           "configurations": {
             "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/iridium-ui/src/environments/environment.ts",
+                  "with": "projects/iridium-ui/src/environments/environment.prod.ts"
+                }
+                ],
               "budgets": [
                 {
                   "type": "initial",

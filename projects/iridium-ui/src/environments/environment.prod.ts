@@ -1,5 +1,5 @@
 export const environment = {
-  production: false,
+  production: true,
   iridium: {
     domain: 'MANAGEMENT_DOMAIN_GOES_HERE',
     redirectUri: 'REDIRECT_URI_GOES_HERE',
