@@ -7,7 +7,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN mkdir -p /var/log/iridium
 
 
-ADD dist/customer-dashboard /usr/share/nginx/www/customer-dashboard
+ADD dist/iridium-ui /usr/share/nginx/www/iridium-ui
 
 
 CMD ["/bin/sh",  "-c",  "exec nginx -g 'daemon off;'"]
