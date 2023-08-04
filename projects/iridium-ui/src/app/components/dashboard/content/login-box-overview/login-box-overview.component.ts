@@ -8,10 +8,7 @@ import {
   ExternalProviderTemplateSummaryResponse
 } from '../../../../services/domain/external-provider-template-summary-response';
 import { ExternalIdentityProviderService } from '../../../../services/external-identity-provider.service';
-import {
-  ApplicationOverviewComponent,
-  UpdateApplicationDialog
-} from '../application-overview/application-overview.component';
+
 import { LoginDescriptorService } from '../../../../services/login-descriptor.service';
 
 @Component({
@@ -75,6 +72,7 @@ export class LoginBoxOverviewComponent implements DynamicContentViewItem, OnInit
   externalProviderTemplateSummaries: ExternalProviderTemplateSummaryResponse[] = [];
   externalTemplateMapType: ExternalProviderTemplateSummaryMapType = {};
   updateTenantLogoFormGroup: UntypedFormGroup;
+  currentLogoUrl = '';
 
   constructor(private externalProviderTemplateService: ExternalProviderTemplateService,  private _formBuilder: UntypedFormBuilder, private loginDescriptorService: LoginDescriptorService, private dialog: MatDialog, private externalProviderService: ExternalIdentityProviderService) {
     this.updateTenantLogoFormGroup = this._formBuilder.group({
@@ -124,12 +122,14 @@ export class LoginBoxOverviewComponent implements DynamicContentViewItem, OnInit
     this.loginDescriptorService.updateTenantLogo(this.updateTenantLogoFormGroup, this.data.tenantId)
       .subscribe((result) => {
         console.log('update log response ', result)
+        this.describeDescriptor();
       })
   }
 
   describeDescriptor() {
     this.loginDescriptorService.get(this.data.tenantId)
       .subscribe(response => {
+        this.currentLogoUrl = response.tenantLogoUrl;
         this.updateTenantLogoFormGroup.patchValue({
           tenantLogoUrl: response.tenantLogoUrl
         })
