@@ -3,13 +3,13 @@ import { DynamicContentViewService } from './content/dynamic-content-view.servic
 import { DynamicContentView } from './content/dynamic-content-view';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { TenantSelectItem } from './domain/tenant-select-item';
-import { NgxIridiumClientService } from '../../../../../ngx-iridium-client/src/lib/ngx-iridium-client.service';
 import { TenantService } from '../../services/tenant.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { MenuItemNode } from './domain/menu-item-node';
 import { MenuItemService } from '../../services/menu-item.service';
 import { Router } from '@angular/router';
+import { NgxIridiumClientService } from '@iridiumidentity/ngx-iridium-client';
 
 
 

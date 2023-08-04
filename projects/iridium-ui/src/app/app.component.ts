@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxIridiumClientService } from 'ngx-iridium-client';
 
 
 @Component({

@@ -3,48 +3,6 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-iridium-client": {
-      "projectType": "library",
-      "root": "projects/ngx-iridium-client",
-      "sourceRoot": "projects/ngx-iridium-client/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/ngx-iridium-client/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/ngx-iridium-client/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/ngx-iridium-client/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "tsConfig": "projects/ngx-iridium-client/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/iridium-ui/src/**/*.ts",
-              "projects/iridium-ui/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
     "iridium-ui": {
       "projectType": "application",
       "schematics": {},
@@ -146,8 +104,8 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/ngx-iridium-client/src/**/*.ts",
-              "projects/ngx-iridium-client/src/**/*.html"
+              "projects/iridium-ui/src/**/*.ts",
+              "projects/iridium-ui/src/**/*.html"
             ]
           }
         }

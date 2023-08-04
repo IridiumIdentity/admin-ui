@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
-import { NgxIridiumClientService } from '../../../../ngx-iridium-client/src/lib/ngx-iridium-client.service';
 import { CookieService } from './cookie.service';
 import { TenantSummaryResponse } from './domain/tenant-summary-response';
 import { environment } from '../../environments/environment';
-import { AbstractBaseService } from '../../../../ngx-iridium-client/src/lib/service/abstract-base-service';
 import { catchError, Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { TenantCreateRequest } from './domain/tenant-create-request';
@@ -13,10 +11,9 @@ import { TenantCreateResponse } from './domain/tenant-create-response';
 @Injectable({
   providedIn: 'root'
 })
-export class TenantService extends AbstractBaseService {
+export class TenantService {
 
   constructor(private http: HttpClient, private cookieService: CookieService) {
-    super();
   }
 
   public getTenantSummaries(): Observable<TenantSummaryResponse[]> {

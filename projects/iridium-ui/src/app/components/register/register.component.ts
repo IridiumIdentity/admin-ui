@@ -1,9 +1,6 @@
-import { ConfirmationDialogComponent } from './../confirmation-dialog/confirmation-dialog.component';
-import { RegisterService } from './../../services/register.service';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { NgxIridiumClientService } from '../../../../../ngx-iridium-client/src/lib/ngx-iridium-client.service';
+import { NgxIridiumClientService } from '@iridiumidentity/ngx-iridium-client';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
