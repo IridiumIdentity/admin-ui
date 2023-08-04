@@ -32,7 +32,7 @@ export class LoginDescriptorService {
   get(tenantId: string) {
     const token = this.cookieService.getCookie('iridium-token')
     const headers = new HttpHeaders({
-      'Accept': 'application/vnd.iridium.id.login-descriptor-response.1+json',
+      'Accept': 'application/json',
       'Authorization': 'Bearer ' + token
     })
     const options = { headers: headers }
