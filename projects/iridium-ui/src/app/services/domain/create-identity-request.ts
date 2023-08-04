@@ -1,3 +1,3 @@
 export interface CreateIdentityRequest {
-    emailAddress: string;
+  emailAddress: string;
 }

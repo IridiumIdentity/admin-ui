@@ -4,10 +4,8 @@ import { Directive, ViewContainerRef } from '@angular/core';
   selector: '[dynamicContentViewHost]',
 })
 export class DynamicContentViewDirective {
-  constructor(public viewContainerRef: ViewContainerRef) { }
+  constructor(public viewContainerRef: ViewContainerRef) {}
 }
-
-
 
 /*
 Copyright Google LLC. All Rights Reserved.

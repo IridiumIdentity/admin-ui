@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpRequest,
+  HttpResponse,
+} from '@angular/common/http';
 import { CookieService } from './cookie.service';
 import { TenantSummaryResponse } from './domain/tenant-summary-response';
 import { environment } from '../../environments/environment';
@@ -9,38 +14,48 @@ import { TenantCreateRequest } from './domain/tenant-create-request';
 import { TenantCreateResponse } from './domain/tenant-create-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TenantService {
-
-  constructor(private http: HttpClient, private cookieService: CookieService) {
-  }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
   public getTenantSummaries(): Observable<TenantSummaryResponse[]> {
-    const token = this.cookieService.getCookie('iridium-token')
+    const token = this.cookieService.getCookie('iridium-token');
     const headers = new HttpHeaders({
-      Accept:  'application/vnd.iridium.id.tenant-summary-list.1+json',
-      'Authorization': 'Bearer ' + token
-    })
+      Accept: 'application/vnd.iridium.id.tenant-summary-list.1+json',
+      Authorization: 'Bearer ' + token,
+    });
 
-    const options = { headers: headers }
-    return this.http.get<TenantSummaryResponse[]>(environment.iridium.domain + 'tenants', options)
+    const options = { headers: headers };
+    return this.http.get<TenantSummaryResponse[]>(
+      environment.iridium.domain + 'tenants',
+      options
+    );
   }
 
   public create(formGroup: FormGroup) {
-    console.log(formGroup.controls['tenantName'].value)
-    console.log(formGroup.controls['environment'].value)
+    console.log(formGroup.controls['tenantName'].value);
+    console.log(formGroup.controls['environment'].value);
     const request = new TenantCreateRequest();
     request.environment = formGroup.controls['environment'].value;
     request.subdomain = formGroup.controls['tenantName'].value;
-    const token = this.cookieService.getCookie('iridium-token')
+    const token = this.cookieService.getCookie('iridium-token');
     const headers = new HttpHeaders({
-      Accept:  'application/vnd.iridium.id.authn.tenant-create-response1+json',
-      'Content-Type': 'application/vnd.iridium.id.authn.tenant-create-request.1+json',
-      'Authorization': 'Bearer ' + token
-    })
-    const options = { headers: headers }
-    return this.http.post<TenantCreateResponse>(environment.iridium.domain + 'tenants', request, options).pipe()
-
+      Accept: 'application/vnd.iridium.id.authn.tenant-create-response1+json',
+      'Content-Type':
+        'application/vnd.iridium.id.authn.tenant-create-request.1+json',
+      Authorization: 'Bearer ' + token,
+    });
+    const options = { headers: headers };
+    return this.http
+      .post<TenantCreateResponse>(
+        environment.iridium.domain + 'tenants',
+        request,
+        options
+      )
+      .pipe();
   }
 }

@@ -1,4 +1,4 @@
 export class ExternalProviderUpdateRequest {
-  clientId: string = "";
-  clientSecret: string = "";
+  clientId: string = '';
+  clientSecret: string = '';
 }

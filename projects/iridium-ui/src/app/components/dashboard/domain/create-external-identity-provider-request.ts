@@ -1,7 +1,7 @@
 export class CreateExternalIdentityProviderRequest {
-  externalProviderTemplateId = "";
+  externalProviderTemplateId = '';
 
-  clientId = "";
+  clientId = '';
 
-  clientSecret = "";
+  clientSecret = '';
 }

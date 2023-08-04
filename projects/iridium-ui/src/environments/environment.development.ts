@@ -5,6 +5,6 @@ export const environment = {
     redirectUri: 'http://localhost:4200/callback',
     successfulAuthDestination: '/dashboard',
     clientId: 'localRunIdChangeForProduction',
-    errorPath: '/error'
-  }
+    errorPath: '/error',
+  },
 };

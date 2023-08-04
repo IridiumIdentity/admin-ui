@@ -12,58 +12,74 @@ import { ApplicationUpdateRequest } from '../components/dashboard/domain/applica
 import { ApplicationUpdateResponse } from '../components/dashboard/domain/application-update-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApplicationService {
-
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
   create(formGroup: FormGroup, tenantId: string) {
-    const token = this.cookieService.getCookie('iridium-token')
+    const token = this.cookieService.getCookie('iridium-token');
     const headers = new HttpHeaders({
-      'Content-Type':  'application/vnd.iridium.id.application-create-request.1+json',
-      'Accept': 'application/vnd.iridium.id.application-create-response.1+json',
-      'Authorization': 'Bearer ' + token
-    })
+      'Content-Type':
+        'application/vnd.iridium.id.application-create-request.1+json',
+      Accept: 'application/vnd.iridium.id.application-create-response.1+json',
+      Authorization: 'Bearer ' + token,
+    });
     const request = new ApplicationCreateRequest();
     request.name = formGroup.controls['applicationName'].value;
     request.applicationTypeId = formGroup.controls['applicationTypeId'].value;
     request.callbackURL = formGroup.controls['authorizationCallbackURL'].value;
     request.description = formGroup.controls['description'].value;
     request.homepageURL = formGroup.controls['homepageURL'].value;
-    const options = { headers: headers }
-    return this.http.post<ApplicationCreateResponse>(environment.iridium.domain + `tenants/${tenantId}/applications`, request, options)
+    const options = { headers: headers };
+    return this.http.post<ApplicationCreateResponse>(
+      environment.iridium.domain + `tenants/${tenantId}/applications`,
+      request,
+      options
+    );
   }
 
   getPage(tenantId: string, count: number) {
-    const token = this.cookieService.getCookie('iridium-token')
+    const token = this.cookieService.getCookie('iridium-token');
     const headers = new HttpHeaders({
-      'Accept': 'application/vnd.iridium.id.application-summary-list.1+json',
-      'Authorization': 'Bearer ' + token
-    })
-    const options = { headers: headers }
-    return this.http.get<PagedListResponse<ApplicationSummaryResponse>>(environment.iridium.domain + `tenants/${tenantId}/applications?page=0&size=${count}`, options)
+      Accept: 'application/vnd.iridium.id.application-summary-list.1+json',
+      Authorization: 'Bearer ' + token,
+    });
+    const options = { headers: headers };
+    return this.http.get<PagedListResponse<ApplicationSummaryResponse>>(
+      environment.iridium.domain +
+        `tenants/${tenantId}/applications?page=0&size=${count}`,
+      options
+    );
   }
 
   get(tenantId: string, applicationId: string) {
-    const token = this.cookieService.getCookie('iridium-token')
+    const token = this.cookieService.getCookie('iridium-token');
     const headers = new HttpHeaders({
-      'Accept': 'application/vnd.iridium.id.application-response.1+json',
-      'Authorization': 'Bearer ' + token
-    })
-    const options = { headers: headers }
-    return this.http.get<ApplicationResponse>(environment.iridium.domain + `tenants/${tenantId}/applications/${applicationId}`, options)
+      Accept: 'application/vnd.iridium.id.application-response.1+json',
+      Authorization: 'Bearer ' + token,
+    });
+    const options = { headers: headers };
+    return this.http.get<ApplicationResponse>(
+      environment.iridium.domain +
+        `tenants/${tenantId}/applications/${applicationId}`,
+      options
+    );
   }
 
   update(formGroup: FormGroup, tenantId: string, applicationId: string) {
-    console.log('update controls are', formGroup.controls)
-    const token = this.cookieService.getCookie('iridium-token')
+    console.log('update controls are', formGroup.controls);
+    const token = this.cookieService.getCookie('iridium-token');
     const headers = new HttpHeaders({
-      'Accept': 'application/vnd.iridium.id.application-update-response.1+json',
-      'Content-Type': 'application/vnd.iridium.id.application-update-request.1+json',
-      'Authorization': 'Bearer ' + token
-    })
-    const options = { headers: headers }
+      Accept: 'application/vnd.iridium.id.application-update-response.1+json',
+      'Content-Type':
+        'application/vnd.iridium.id.application-update-request.1+json',
+      Authorization: 'Bearer ' + token,
+    });
+    const options = { headers: headers };
     const request = new ApplicationUpdateRequest();
     request.applicationTypeId = formGroup.controls['applicationTypeId'].value;
     request.name = formGroup.controls['applicationName'].value;
@@ -72,7 +88,11 @@ export class ApplicationService {
     request.privacyPolicyUrl = formGroup.controls['privacyPolicyURL'].value;
     request.redirectUri = formGroup.controls['authorizationCallbackURL'].value;
     request.iconUrl = formGroup.controls['iconURL'].value;
-    return this.http.put<ApplicationUpdateResponse>(environment.iridium.domain + `tenants/${tenantId}/applications/${applicationId}`, request, options)
-
+    return this.http.put<ApplicationUpdateResponse>(
+      environment.iridium.domain +
+        `tenants/${tenantId}/applications/${applicationId}`,
+      request,
+      options
+    );
   }
 }

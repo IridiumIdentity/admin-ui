@@ -9,33 +9,47 @@ import { ApplicationResponse } from './domain/application-response';
 import { LoginDescriptorResponse } from './domain/login-descriptor-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginDescriptorService {
-
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
   updateTenantLogo(formGroup: FormGroup, tenantId: string) {
-    console.log('update ' + tenantId + 'with ' + formGroup.controls['tenantLogoUrl'].value)
+    console.log(
+      'update ' + tenantId + 'with ' + formGroup.controls['tenantLogoUrl'].value
+    );
     const request = new TenantLogoUpdateRequest();
     request.logoUrl = formGroup.controls['tenantLogoUrl'].value;
-    const token = this.cookieService.getCookie('iridium-token')
+    const token = this.cookieService.getCookie('iridium-token');
     const headers = new HttpHeaders({
-      Accept:  'application/vnd.iridium.id.tenant-logo-update-response.1+json',
-      'Content-Type': 'application/vnd.iridium.id.tenant-logo-update-request.1+json',
-      'Authorization': 'Bearer ' + token
-    })
-    const options = { headers: headers }
-    return this.http.put<TenantCreateResponse>(environment.iridium.domain + `tenants/${tenantId}/login-descriptors`, request, options).pipe()
+      Accept: 'application/vnd.iridium.id.tenant-logo-update-response.1+json',
+      'Content-Type':
+        'application/vnd.iridium.id.tenant-logo-update-request.1+json',
+      Authorization: 'Bearer ' + token,
+    });
+    const options = { headers: headers };
+    return this.http
+      .put<TenantCreateResponse>(
+        environment.iridium.domain + `tenants/${tenantId}/login-descriptors`,
+        request,
+        options
+      )
+      .pipe();
   }
 
   get(tenantId: string) {
-    const token = this.cookieService.getCookie('iridium-token')
+    const token = this.cookieService.getCookie('iridium-token');
     const headers = new HttpHeaders({
-      'Accept': 'application/json',
-      'Authorization': 'Bearer ' + token
-    })
-    const options = { headers: headers }
-    return this.http.get<LoginDescriptorResponse>(environment.iridium.domain + `tenants/${tenantId}/login-descriptors`, options)
+      Accept: 'application/json',
+      Authorization: 'Bearer ' + token,
+    });
+    const options = { headers: headers };
+    return this.http.get<LoginDescriptorResponse>(
+      environment.iridium.domain + `tenants/${tenantId}/login-descriptors`,
+      options
+    );
   }
 }
