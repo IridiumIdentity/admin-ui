@@ -158,6 +158,8 @@ export class LoginBoxOverviewComponent implements DynamicContentViewItem, OnInit
 
   ngOnInit(): void {
 
+    this.describeDescriptor();
+
     this.externalProviderTemplateService.getSummaries()
       .subscribe(externalTemplates => {
         this.externalProviderTemplateSummaries = externalTemplates;
