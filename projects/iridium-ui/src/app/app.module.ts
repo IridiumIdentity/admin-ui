@@ -51,12 +51,12 @@ import { TenantOverviewComponent } from './components/dashboard/content/tenant-o
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { NgxIridiumClientModule } from 'ngx-iridium-client';
 import { NoopInterceptor } from './http-interceptors/http-interceptor';
 import {
   AddExternalProviderDialog,
   LoginBoxOverviewComponent, UpdateExternalProviderDialog
 } from './components/dashboard/content/login-box-overview/login-box-overview.component';
+import { NgxIridiumClientModule } from '@iridiumidentity/ngx-iridium-client';
 
 @NgModule({
   declarations: [

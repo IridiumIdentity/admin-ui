@@ -12,6 +12,7 @@ import {
   ApplicationOverviewComponent,
   UpdateApplicationDialog
 } from '../application-overview/application-overview.component';
+import { LoginDescriptorService } from '../../../../services/login-descriptor.service';
 
 @Component({
   selector: 'update-external-provider-dialog',
@@ -73,8 +74,12 @@ export class LoginBoxOverviewComponent implements DynamicContentViewItem, OnInit
   dataSource: ExternalProviderResponse[] = [];
   externalProviderTemplateSummaries: ExternalProviderTemplateSummaryResponse[] = [];
   externalTemplateMapType: ExternalProviderTemplateSummaryMapType = {};
+  updateTenantLogoFormGroup: UntypedFormGroup;
 
-  constructor(private externalProviderTemplateService: ExternalProviderTemplateService, private dialog: MatDialog, private externalProviderService: ExternalIdentityProviderService) {
+  constructor(private externalProviderTemplateService: ExternalProviderTemplateService,  private _formBuilder: UntypedFormBuilder, private loginDescriptorService: LoginDescriptorService, private dialog: MatDialog, private externalProviderService: ExternalIdentityProviderService) {
+    this.updateTenantLogoFormGroup = this._formBuilder.group({
+      tenantLogoUrl: ['', Validators.required],
+    })
   }
 
   onRowClick(index: number) {
@@ -116,6 +121,19 @@ export class LoginBoxOverviewComponent implements DynamicContentViewItem, OnInit
   }
 
   updateLogo() {
+    this.loginDescriptorService.updateTenantLogo(this.updateTenantLogoFormGroup, this.data.tenantId)
+      .subscribe((result) => {
+        console.log('update log response ', result)
+      })
+  }
+
+  describeDescriptor() {
+    this.loginDescriptorService.get(this.data.tenantId)
+      .subscribe(response => {
+        this.updateTenantLogoFormGroup.patchValue({
+          tenantLogoUrl: response.tenantLogoUrl
+        })
+      })
 
   }
 
@@ -139,6 +157,7 @@ export class LoginBoxOverviewComponent implements DynamicContentViewItem, OnInit
   }
 
   ngOnInit(): void {
+
     this.externalProviderTemplateService.getSummaries()
       .subscribe(externalTemplates => {
         this.externalProviderTemplateSummaries = externalTemplates;
