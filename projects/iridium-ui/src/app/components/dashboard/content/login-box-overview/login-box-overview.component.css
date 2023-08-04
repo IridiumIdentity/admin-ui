@@ -40,6 +40,17 @@
   justify-content: flex-start;
   flex-direction: column;
   display: flex;
+
+}
+.logo-card {
+  padding: 5px;
+  width: 300px;
+  
+
+}
+.logo-card-background {
+
+
 }
 
 .add-logo-button {
