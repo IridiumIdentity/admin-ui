@@ -1,3 +1,3 @@
 export interface AuthenticationRequest {
-    username: string;
+  username: string;
 }

@@ -1,4 +1,4 @@
 export interface CreateIdentityResponse {
-    id: string;
-    username: string;
+  id: string;
+  username: string;
 }

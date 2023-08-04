@@ -9,20 +9,26 @@ import { PagedListResponse } from './domain/paged-list-response';
 import { IdentitySummaryResponse } from '../components/dashboard/domain/identity-summary-response';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IdentityService {
-
-  constructor(private http: HttpClient, private cookieService: CookieService) { }
-
+  constructor(
+    private http: HttpClient,
+    private cookieService: CookieService
+  ) {}
 
   getSummariesByParentTenant(tenantId: string, count: number) {
-    const token = this.cookieService.getCookie('iridium-token')
+    const token = this.cookieService.getCookie('iridium-token');
     const headers = new HttpHeaders({
-      'Accept': 'application/vnd.iridium.id.identity-summary-response-list.1+json',
-      'Authorization': 'Bearer ' + token
-    })
-    const options = { headers: headers }
-    return this.http.get<PagedListResponse<IdentitySummaryResponse>>(environment.iridium.domain + `tenants/${tenantId}/identities?page=0&size=${count}`, options)
+      Accept:
+        'application/vnd.iridium.id.identity-summary-response-list.1+json',
+      Authorization: 'Bearer ' + token,
+    });
+    const options = { headers: headers };
+    return this.http.get<PagedListResponse<IdentitySummaryResponse>>(
+      environment.iridium.domain +
+        `tenants/${tenantId}/identities?page=0&size=${count}`,
+      options
+    );
   }
 }

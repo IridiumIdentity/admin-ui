@@ -1,4 +1,4 @@
-export interface TenantSelectItem{
+export interface TenantSelectItem {
   value: string;
   viewValue: string;
 }

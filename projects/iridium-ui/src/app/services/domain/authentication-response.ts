@@ -1,6 +1,6 @@
 export interface AuthenticationResponse {
-    data: {
-        userToken: string;
-        userRefreshToken: string;
-    }
+  data: {
+    userToken: string;
+    userRefreshToken: string;
+  };
 }

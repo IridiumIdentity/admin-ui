@@ -8,9 +8,8 @@ describe('ExternalProviderOverviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ExternalProviderOverviewComponent ]
-    })
-    .compileComponents();
+      declarations: [ExternalProviderOverviewComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ExternalProviderOverviewComponent);
     component = fixture.componentInstance;

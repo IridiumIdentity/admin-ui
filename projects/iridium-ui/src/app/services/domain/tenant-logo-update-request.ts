@@ -1,5 +1,3 @@
 export class TenantLogoUpdateRequest {
-
-  logoUrl: string = ''
-
+  logoUrl: string = '';
 }

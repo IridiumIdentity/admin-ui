@@ -1,9 +1,11 @@
 import { Type } from '@angular/core';
 
 export class DynamicContentView {
-  constructor(public component: Type<any>, public data: any) {}
+  constructor(
+    public component: Type<any>,
+    public data: any
+  ) {}
 }
-
 
 /*
 Copyright Google LLC. All Rights Reserved.

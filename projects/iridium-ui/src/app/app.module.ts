@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule }  from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,29 +20,35 @@ import { MatListModule } from '@angular/material/list';
 import { RegisterComponent } from './components/register/register.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { HTTP_INTERCEPTORS, HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  HttpClientXsrfModule,
+} from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
-import { CreateTenantPromptDialog, DashboardComponent } from './components/dashboard/dashboard.component';
+import {
+  CreateTenantPromptDialog,
+  DashboardComponent,
+} from './components/dashboard/dashboard.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import { DynamicContentViewService } from './components/dashboard/content/dynamic-content-view.service';
 import { DynamicContentViewDirective } from './components/dashboard/content/dynamic-content-view.directive';
-import {
-  UserOverviewComponent
-} from './components/dashboard/content/user-overview/user-overview.component';
+import { UserOverviewComponent } from './components/dashboard/content/user-overview/user-overview.component';
 import {
   CreateRoleDialog,
-  RolesOverviewComponent
+  RolesOverviewComponent,
 } from './components/dashboard/content/roles-overview/roles-overview.component';
 import {
   ApplicationOverviewComponent,
-  CreateApplicationDialog, UpdateApplicationDialog
+  CreateApplicationDialog,
+  UpdateApplicationDialog,
 } from './components/dashboard/content/application-overview/application-overview.component';
 import {
   ApiOverviewComponent,
-  CreateAPIDialog
+  CreateAPIDialog,
 } from './components/dashboard/content/api-overview/api-overview.component';
 import { DynamicContentViewComponent } from './components/dashboard/content/dynamic-content-view.component';
 import { MatTableModule } from '@angular/material/table';
@@ -54,7 +60,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { NoopInterceptor } from './http-interceptors/http-interceptor';
 import {
   AddExternalProviderDialog,
-  LoginBoxOverviewComponent, UpdateExternalProviderDialog
+  LoginBoxOverviewComponent,
+  UpdateExternalProviderDialog,
 } from './components/dashboard/content/login-box-overview/login-box-overview.component';
 import { NgxIridiumClientModule } from '@iridiumidentity/ngx-iridium-client';
 
@@ -80,7 +87,7 @@ import { NgxIridiumClientModule } from '@iridiumidentity/ngx-iridium-client';
     CreateRoleDialog,
     LoginBoxOverviewComponent,
     AddExternalProviderDialog,
-    UpdateExternalProviderDialog
+    UpdateExternalProviderDialog,
   ],
   imports: [
     BrowserModule,
@@ -111,13 +118,16 @@ import { NgxIridiumClientModule } from '@iridiumidentity/ngx-iridium-client';
     MatCheckboxModule,
     NgxIridiumClientModule,
   ],
-  providers: [DynamicContentViewService, {provide: 'config', useValue: environment},
+  providers: [
+    DynamicContentViewService,
+    { provide: 'config', useValue: environment },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: NoopInterceptor,
-      multi: true
+      multi: true,
     },
-  {provide: 'environment', useValue: environment}],
-  bootstrap: [AppComponent]
+    { provide: 'environment', useValue: environment },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

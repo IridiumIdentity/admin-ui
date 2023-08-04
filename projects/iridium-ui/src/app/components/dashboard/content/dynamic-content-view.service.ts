@@ -11,58 +11,59 @@ import { LoginBoxOverviewComponent } from './login-box-overview/login-box-overvi
 
 @Injectable()
 export class DynamicContentViewService {
-  viewDictionary: { [id:string] : DynamicContentView } = {}
+  viewDictionary: { [id: string]: DynamicContentView } = {};
 
   constructor() {
-
     this.viewDictionary['applications'] = new DynamicContentView(
-      ApplicationOverviewComponent, {}
-    )
+      ApplicationOverviewComponent,
+      {}
+    );
     this.viewDictionary['apis'] = new DynamicContentView(
-      ApiOverviewComponent, {}
-    )
+      ApiOverviewComponent,
+      {}
+    );
 
     this.viewDictionary['users'] = new DynamicContentView(
-      UserOverviewComponent, {}
-    )
+      UserOverviewComponent,
+      {}
+    );
 
     this.viewDictionary['roles'] = new DynamicContentView(
-      RolesOverviewComponent, {}
-    )
+      RolesOverviewComponent,
+      {}
+    );
 
     this.viewDictionary['system overview'] = new DynamicContentView(
-      SystemOverviewComponent, {}
-    )
+      SystemOverviewComponent,
+      {}
+    );
 
     this.viewDictionary['tenant overview'] = new DynamicContentView(
-      TenantOverviewComponent, {}
-    )
+      TenantOverviewComponent,
+      {}
+    );
 
     this.viewDictionary['login box settings'] = new DynamicContentView(
-      LoginBoxOverviewComponent, {}
-    )
+      LoginBoxOverviewComponent,
+      {}
+    );
   }
 
-
-
   getViews() {
-    return this.viewDictionary
+    return this.viewDictionary;
   }
 
   getViewsForTenant(tenantId: string) {
-    for(let key in this.viewDictionary) {
-      this.viewDictionary[key].data.tenantId = tenantId
+    for (let key in this.viewDictionary) {
+      this.viewDictionary[key].data.tenantId = tenantId;
     }
-    return this.viewDictionary
+    return this.viewDictionary;
   }
 
   getView(key: string) {
-    return this.viewDictionary[key]
+    return this.viewDictionary[key];
   }
-
-
 }
-
 
 /*
 Copyright Google LLC. All Rights Reserved.

@@ -1,4 +1,4 @@
 export class TenantCreateRequest {
-  subdomain = ''
+  subdomain = '';
   environment = '';
 }
