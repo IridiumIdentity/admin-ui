@@ -1,10 +1,10 @@
 {
   "name": "iridium-angular-client",
-  "version": "0.0.0",
+  "version": "0.2.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "lint": "npm run lint-ui",
+    "lint-fix": "ng lint --fix",
     "build": "ng build",
     "build-all": "ng build ng build iridium-ui",
     "watch": "ng build --watch --configuration development",
