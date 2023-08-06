@@ -1,1 +1,1 @@
-# Iridium Angular Admin UI Workspace
+# Iridium Admin UI Workspace
