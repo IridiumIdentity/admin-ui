@@ -10,6 +10,7 @@ import { MenuItemNode } from './domain/menu-item-node';
 import { MenuItemService } from '../../services/menu-item.service';
 import { Router } from '@angular/router';
 import { NgxIridiumClientService } from '@iridiumidentity/ngx-iridium-client';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'create-tenant-prompt-dialog',
@@ -68,11 +69,27 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
     private iridiumClient: NgxIridiumClientService,
     private tenantService: TenantService,
-    private menuItemService: MenuItemService
+    private menuItemService: MenuItemService,
+    private _snackBar: MatSnackBar
   ) {
     this.menuItemNodes = this.menuItemService.getMenuItems();
   }
   ngOnInit(): void {
+    if (
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      )
+    ) {
+      // true for mobile device
+      this._snackBar.open(
+        'Please open on a desktop, Iridium is meant to be used on a desktop or laptop.',
+        'close',
+        {
+          horizontalPosition: 'center',
+          verticalPosition: 'top',
+        }
+      );
+    }
     this.views = this.contentViewService.getViews();
     this.view = this.views['system overview'];
 

@@ -64,6 +64,11 @@ import {
   UpdateExternalProviderDialog,
 } from './components/dashboard/content/login-box-overview/login-box-overview.component';
 import { NgxIridiumClientModule } from '@iridiumidentity/ngx-iridium-client';
+import {
+  NgxGoogleAnalyticsModule,
+  NgxGoogleAnalyticsRouterModule,
+} from 'ngx-google-analytics';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -90,6 +95,8 @@ import { NgxIridiumClientModule } from '@iridiumidentity/ngx-iridium-client';
     UpdateExternalProviderDialog,
   ],
   imports: [
+    NgxGoogleAnalyticsModule.forRoot('IRIDIUM_ANALYTIC_ID'),
+    NgxGoogleAnalyticsRouterModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -117,6 +124,7 @@ import { NgxIridiumClientModule } from '@iridiumidentity/ngx-iridium-client';
     MatButtonToggleModule,
     MatCheckboxModule,
     NgxIridiumClientModule,
+    MatSnackBarModule
   ],
   providers: [
     DynamicContentViewService,

@@ -3,7 +3,7 @@
   <div class="add-logo-url-container">
     <form [formGroup]="updateTenantLogoFormGroup">
       <mat-card class="logo-card">
-        <img mat-card-image src="{{ currentLogoUrl }}" alt="tenant logo" />
+        <img *ngIf="currentLogoUrl" mat-card-image src="{{ currentLogoUrl }}" alt="tenant logo" />
       </mat-card>
       <mat-form-field class="icon-url-field">
         <mat-label>Logo URL</mat-label>

@@ -26,4 +26,19 @@ export class ExternalProviderTemplateService {
       options
     );
   }
+
+  getAvailableTemplateSummaries(tenantId: string) {
+    const token = this.cookieService.getCookie('iridium-token');
+    const headers = new HttpHeaders({
+      Accept:
+        'application/vnd.iridium.id.external-provider-template-summary-list.1+json',
+      Authorization: 'Bearer ' + token,
+    });
+    const options = { headers: headers };
+    return this.http.get<ExternalProviderTemplateSummaryResponse[]>(
+      environment.iridium.domain +
+        `tenants/${tenantId}/external-provider-templates`,
+      options
+    );
+  }
 }

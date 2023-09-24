@@ -192,7 +192,7 @@ export class LoginBoxOverviewComponent
     this.describeDescriptor();
 
     this.externalProviderTemplateService
-      .getSummaries()
+      .getAvailableTemplateSummaries(this.data.tenantId)
       .subscribe(externalTemplates => {
         this.externalProviderTemplateSummaries = externalTemplates;
 
