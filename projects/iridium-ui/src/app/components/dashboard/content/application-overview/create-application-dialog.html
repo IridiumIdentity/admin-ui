@@ -32,13 +32,21 @@
         <mat-label>Description</mat-label>
         <textarea matInput formControlName="description"></textarea>
       </mat-form-field>
-      <div>
+      <div
+        *ngIf="
+          data.webServiceApplicationTypeId !==
+          createApplicationFormGroup.controls['applicationTypeId'].value
+        ">
         <mat-form-field appearance="fill" class="form-input">
           <mat-label>Authorization Callback URL</mat-label>
           <input matInput formControlName="authorizationCallbackURL" required />
         </mat-form-field>
       </div>
-      <div>
+      <div
+        *ngIf="
+          data.webServiceApplicationTypeId !==
+          createApplicationFormGroup.controls['applicationTypeId'].value
+        ">
         <button
           mat-button
           type="submit"
@@ -46,6 +54,13 @@
           (click)="create()">
           Submit
         </button>
+      </div>
+      <div
+        *ngIf="
+          data.webServiceApplicationTypeId ===
+          createApplicationFormGroup.controls['applicationTypeId'].value
+        ">
+        <button mat-button type="submit" (click)="create()">Submit</button>
       </div>
     </div>
   </form>

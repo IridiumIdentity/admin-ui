@@ -25,6 +25,22 @@
         <mat-label>Client Id</mat-label>
         <input matInput formControlName="clientId" />
       </mat-form-field>
+      <div
+        *ngIf="
+          data.webServiceApplicationTypeId ===
+          data.application.applicationTypeId
+        ">
+        <mat-form-field appearance="fill" class="form-input">
+          <mat-label>Client Secret</mat-label>
+          <input
+            [type]="hide ? 'password' : 'text'"
+            matInput
+            formControlName="clientSecret" />
+          <mat-icon matSuffix (click)="hide = !hide">{{
+            hide ? 'visibility_off' : 'visibility'
+          }}</mat-icon>
+        </mat-form-field>
+      </div>
 
       <div>
         <mat-form-field appearance="fill" class="form-input">
@@ -32,10 +48,7 @@
           <input matInput formControlName="homepageURL" required />
         </mat-form-field>
       </div>
-      <mat-form-field appearance="fill" class="form-input">
-        <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description"></textarea>
-      </mat-form-field>
+
       <div>
         <mat-form-field appearance="fill" class="form-input">
           <mat-label>Authorization Callback URL</mat-label>
@@ -48,8 +61,8 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="form-input">
-          <mat-label>Icon URL</mat-label>
-          <input matInput formControlName="iconURL" />
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
         </mat-form-field>
       </div>
       <div>
