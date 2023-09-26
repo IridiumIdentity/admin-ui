@@ -16,4 +16,6 @@ export class ApplicationResponse {
   callbackURL: string = '';
 
   privacyPolicyUrl: string = '';
+
+  clientSecret: string = '';
 }

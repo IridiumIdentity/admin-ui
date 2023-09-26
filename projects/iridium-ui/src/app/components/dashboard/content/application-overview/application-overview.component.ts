@@ -24,6 +24,7 @@ import {
 import { ApplicationTypeService } from '../../../../services/application-type.service';
 import { ApplicationTypeSummary } from '../../domain/application-type-summary';
 import { ApplicationService } from '../../../../services/application.service';
+import { ClientSecretService } from '../../../../services/client-secret.service';
 
 @Component({
   selector: 'update-application-dialog',
@@ -32,6 +33,7 @@ import { ApplicationService } from '../../../../services/application.service';
 })
 export class UpdateApplicationDialog {
   updateApplicationFormGroup: UntypedFormGroup;
+  hide = true;
   constructor(
     public dialogRef: MatDialogRef<ApplicationOverviewComponent>,
     private _formBuilder: UntypedFormBuilder,
@@ -40,6 +42,9 @@ export class UpdateApplicationDialog {
     this.updateApplicationFormGroup = this._formBuilder.group({
       applicationName: [this.data.application.name, Validators.required],
       clientId: [{ value: this.data.application.clientId, disabled: true }],
+      clientSecret: [
+        { value: this.data.application.clientSecret, disabled: true },
+      ],
       homepageURL: [this.data.application.homepageURL, Validators.required],
       description: [this.data.application.description],
       authorizationCallbackURL: [
@@ -81,6 +86,7 @@ export class CreateApplicationDialog {
   }
 
   create() {
+    console.log('form group', this.createApplicationFormGroup);
     this.dialogRef.close({ formGroup: this.createApplicationFormGroup });
   }
 }
@@ -102,8 +108,10 @@ export class ApplicationOverviewComponent
   dataSource: ApplicationSummary[] = [];
   applicationTypes: ApplicationTypeSummary[] = [];
   applicationTypeMap: ApplicationTypeSummaryMapType = {};
+  webServiceApplicationTypeId = '';
 
   constructor(
+    private clientSecretService: ClientSecretService,
     private cookieService: CookieService,
     private route: ActivatedRoute,
     private _formBuilder: UntypedFormBuilder,
@@ -118,13 +126,22 @@ export class ApplicationOverviewComponent
       data: {
         applicationTypes: this.applicationTypes,
         tenantId: this.data.tenantId,
+        webServiceApplicationTypeId: this.webServiceApplicationTypeId,
       },
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(async result => {
       this.applicationService
         .create(result.formGroup, this.data.tenantId)
         .subscribe(response => {
+          if (this.webServiceApplicationTypeId === response.applicationTypeId) {
+            console.log('this is a client secret');
+            this.clientSecretService
+              .create(this.data.tenantId, response.id)
+              .subscribe(result => {
+                console.log('client secret create good ', result);
+              });
+          }
           this.refreshDataSource();
         });
     });
@@ -139,9 +156,11 @@ export class ApplicationOverviewComponent
             applicationTypes: this.applicationTypes,
             tenantId: this.data.tenantId,
             application: applicationResponse,
+            webServiceApplicationTypeId: this.webServiceApplicationTypeId,
           },
         });
         dialogRef.afterClosed().subscribe(updateResult => {
+          console.log('update result', updateResult)
           this.applicationService
             .update(
               updateResult.formGroup,
@@ -161,6 +180,10 @@ export class ApplicationOverviewComponent
       this.applicationTypes = applicationTypes;
 
       for (let i = 0; i < applicationTypes.length; i++) {
+        if (applicationTypes[i].name === 'Web Service Application') {
+          console.log('web service app ', applicationTypes[i]);
+          this.webServiceApplicationTypeId = applicationTypes[i].id;
+        }
         this.applicationTypeMap[applicationTypes[i].id] = applicationTypes[i];
       }
       this.refreshDataSource();
