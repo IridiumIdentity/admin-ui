@@ -11,6 +11,8 @@ import { MenuItemService } from '../../services/menu-item.service';
 import { Router } from '@angular/router';
 import { NgxIridiumClientService } from '@iridiumidentity/ngx-iridium-client';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { delay } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'create-tenant-prompt-dialog',
@@ -32,20 +34,7 @@ export class CreateTenantPromptDialog {
 
   onDialogYes() {
     const dialogRef = this.dialogRef;
-    this.tenantService.create(this.createTenantFormGroup).subscribe({
-      next(v) {
-        console.log('success creating tenant');
-        console.log(v);
-        dialogRef.close({});
-      },
-      error(e) {
-        console.log('error creating tenant');
-        console.log(e);
-      },
-      complete() {
-        console.log('complete');
-      },
-    });
+    dialogRef.close({ tenantName: this.createTenantFormGroup.controls['tenantName'].value, environment: this.createTenantFormGroup.controls['environment'].value });
   }
 }
 
@@ -64,6 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   selectedTenant!: string;
 
   constructor(
+    private authService: AuthService,
     private router: Router,
     private contentViewService: DynamicContentViewService,
     private dialog: MatDialog,
@@ -132,9 +122,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
       data: {},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('get tenant summaries');
-      this.getTenantSummaries();
+    dialogRef.afterClosed().subscribe(tenantProps => {
+      if (tenantProps !== undefined) {
+        console.log('tenant pprops', tenantProps.environment)
+
+        this.tenantService.create(tenantProps.tenantName, tenantProps.environment).subscribe(response => {
+            this.getTenantSummaries();
+        });
+      }
     });
   }
 
@@ -144,6 +139,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   register() {
     this.router.navigateByUrl('/register');
+  }
+
+  logout() {
+    this.authService.logout().subscribe(response => {
+        this.router.navigateByUrl('/')
+      }
+    );
+
+
   }
 
   homeButtonClick(): void {

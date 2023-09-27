@@ -36,12 +36,11 @@ export class TenantService {
     );
   }
 
-  public create(formGroup: FormGroup) {
-    console.log(formGroup.controls['tenantName'].value);
-    console.log(formGroup.controls['environment'].value);
+  public create(tenantName: string, tenantEnvironment: string) {
+
     const request = new TenantCreateRequest();
-    request.environment = formGroup.controls['environment'].value;
-    request.subdomain = formGroup.controls['tenantName'].value;
+    request.environment = tenantEnvironment;
+    request.subdomain = tenantName;
     const token = this.cookieService.getCookie('iridium-token');
     const headers = new HttpHeaders({
       Accept: 'application/vnd.iridium.id.authn.tenant-create-response1+json',

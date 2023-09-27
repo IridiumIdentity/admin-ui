@@ -18,9 +18,6 @@ export class LoginDescriptorService {
   ) {}
 
   updateTenantLogo(formGroup: FormGroup, tenantId: string) {
-    console.log(
-      'update ' + tenantId + 'with ' + formGroup.controls['tenantLogoUrl'].value
-    );
     const request = new TenantLogoUpdateRequest();
     request.logoUrl = formGroup.controls['tenantLogoUrl'].value;
     const token = this.cookieService.getCookie('iridium-token');
