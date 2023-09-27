@@ -8,7 +8,10 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private cookieService: CookieService, private http: HttpClient) {}
+  constructor(
+    private cookieService: CookieService,
+    private http: HttpClient
+  ) {}
 
   getCurrentUserToken(): string {
     return this.cookieService.getCookie('iridium-token');

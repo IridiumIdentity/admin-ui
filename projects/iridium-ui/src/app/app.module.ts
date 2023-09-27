@@ -124,7 +124,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonToggleModule,
     MatCheckboxModule,
     NgxIridiumClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   providers: [
     DynamicContentViewService,

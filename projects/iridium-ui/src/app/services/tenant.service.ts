@@ -37,7 +37,6 @@ export class TenantService {
   }
 
   public create(tenantName: string, tenantEnvironment: string) {
-
     const request = new TenantCreateRequest();
     request.environment = tenantEnvironment;
     request.subdomain = tenantName;

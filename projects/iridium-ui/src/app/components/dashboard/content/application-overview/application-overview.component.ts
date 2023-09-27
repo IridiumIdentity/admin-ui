@@ -160,7 +160,7 @@ export class ApplicationOverviewComponent
           },
         });
         dialogRef.afterClosed().subscribe(updateResult => {
-          console.log('update result', updateResult)
+          console.log('update result', updateResult);
           this.applicationService
             .update(
               updateResult.formGroup,

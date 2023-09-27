@@ -34,7 +34,10 @@ export class CreateTenantPromptDialog {
 
   onDialogYes() {
     const dialogRef = this.dialogRef;
-    dialogRef.close({ tenantName: this.createTenantFormGroup.controls['tenantName'].value, environment: this.createTenantFormGroup.controls['environment'].value });
+    dialogRef.close({
+      tenantName: this.createTenantFormGroup.controls['tenantName'].value,
+      environment: this.createTenantFormGroup.controls['environment'].value,
+    });
   }
 }
 
@@ -124,11 +127,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe(tenantProps => {
       if (tenantProps !== undefined) {
-        console.log('tenant pprops', tenantProps.environment)
+        console.log('tenant pprops', tenantProps.environment);
 
-        this.tenantService.create(tenantProps.tenantName, tenantProps.environment).subscribe(response => {
+        this.tenantService
+          .create(tenantProps.tenantName, tenantProps.environment)
+          .subscribe(response => {
             this.getTenantSummaries();
-        });
+          });
       }
     });
   }
@@ -143,11 +148,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   logout() {
     this.authService.logout().subscribe(response => {
-        this.router.navigateByUrl('/')
-      }
-    );
-
-
+      this.router.navigateByUrl('/');
+    });
   }
 
   homeButtonClick(): void {
