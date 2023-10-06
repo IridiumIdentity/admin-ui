@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.views = this.contentViewService.getViewsForTenant(
         this.selectedTenant
       );
-      this.view = this.contentViewService.getView('system overview');
+      this.view = this.contentViewService.getView('tenant overview');
     }
   }
 
