@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DynamicContentViewItem } from '../dynamic-content-view-item';
+import * as echarts from 'echarts';
+import { TenantOverviewMetricService } from '../../../../services/tenant-overview-metric.service';
 
 @Component({
   selector: 'app-system-overview',
@@ -8,5 +10,5 @@ import { DynamicContentViewItem } from '../dynamic-content-view-item';
 })
 export class SystemOverviewComponent implements DynamicContentViewItem {
   @Input() data: any;
-  constructor() {}
+
 }
