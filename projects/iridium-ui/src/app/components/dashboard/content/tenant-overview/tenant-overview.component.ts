@@ -13,7 +13,10 @@ import { AggregateUsersConfigService } from '../../../../services/aggregate-user
 export class TenantOverviewComponent implements DynamicContentViewItem, OnInit {
   readonly daysToSubtract = environment.tenantMetricDaysToGoBack;
   @Input() data: any;
-  constructor(private overviewMetricService: TenantOverviewMetricService, private aggregateConfigService: AggregateUsersConfigService) {}
+  constructor(
+    private overviewMetricService: TenantOverviewMetricService,
+    private aggregateConfigService: AggregateUsersConfigService
+  ) {}
 
   ngOnInit(): void {
     let pieChart = echarts.init(document.getElementById('pie'), {
@@ -35,5 +38,4 @@ export class TenantOverviewComponent implements DynamicContentViewItem, OnInit {
         pieChart.setOption(this.aggregateConfigService.get(data));
       });
   }
-
 }

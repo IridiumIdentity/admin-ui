@@ -10,5 +10,4 @@ import { TenantOverviewMetricService } from '../../../../services/tenant-overvie
 })
 export class SystemOverviewComponent implements DynamicContentViewItem {
   @Input() data: any;
-
 }
